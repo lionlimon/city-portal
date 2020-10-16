@@ -9,7 +9,7 @@
       @endif
       {{-- КонецЕсли --}}
 
-      П
+      
       @foreach ($elements as $element)
         
         @foreach ($element as $num => $url)
@@ -18,10 +18,11 @@
         
       @endforeach
       
-
+      {{-- Если на последней странице --}}
       @if ($paginator->hasMorePages())
         <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}">Вперед</a></li>
       @endif
+      {{-- КонецЕсли --}}
     </ul>
   </nav>
 </div>
