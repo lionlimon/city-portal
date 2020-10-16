@@ -9,10 +9,12 @@ use App\User;
 class HomeController extends Controller
 {
 	public function index() {
+		$paginateCount = 9;
+
 		$applications = Application::resolved()
 			->limit(8)
 			->orderBy('created_at', 'desc')
-			->get();
+			->paginate($paginateCount);
 
 		$resolvedCount = Application::resolved()->count();
 		$usersCount = User::count();

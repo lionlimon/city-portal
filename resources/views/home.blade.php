@@ -85,4 +85,5 @@
 		
 	</div>
 </div>
+{{ $applications->links('components.paginate') }}
 @endsection
