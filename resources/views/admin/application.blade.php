@@ -30,28 +30,17 @@
         @forelse($applications as $application) 
   
         <div class="col-sm-6 col-12 mb-3">
-          <div class="card main-card problem-card">
-            <div class="card-img-wrap">
-              <img src="{{ asset($application->problem_img) }}" alt="{{ $application->name }}" class="card-img-top problem-card-img">
-            </div>
-            <div class="card-body">
-              <span class="badge badge-secondary">{{ $application->status->name }}</span>
-              <h5 class="card-title">{{ $application->name }}</h5>
-              <p class="card-text">{{ $application->description }}</p>
-
+          @component('components.application_card')
+            @slot('application', $application)
+            @slot('body')
               @if ($application->isNew())
-              <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#app-{{ $application->id }}-resolve">Решена</button>
-              <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#app-{{ $application->id }}-reject">Отклонена</button>
+                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#app-{{ $application->id }}-resolve">Решена</button>
+                <button class="btn btn-secondary btn-block" data-toggle="modal" data-target="#app-{{ $application->id }}-reject">Отклонена</button>
               @endif
-              
-              @if($application->isRejected()) 
-              <div class="alert alert-info" role="alert">
-                <h6>Причина отказа:</h6>
-                {{ $application->result_text }}
-              </div>
-              @endif
-            </div>
-          </div>
+            @endslot
+          @endcomponent
+
+
         </div>
   
         <div class="modal" id="app-{{ $application->id }}-resolve" tabindex="-1" role="dialog">

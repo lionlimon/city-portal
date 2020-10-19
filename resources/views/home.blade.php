@@ -65,20 +65,11 @@
 	<div class="row">
 		@forelse ($applications as $application)
 		<div class="col-4 mb-3">
-      <div class="card main-card">
-      
-        <div class="card-img-wrap">
-          <img class="card-img-top" src="{{ asset($application->problem_img) }}" alt="{{ $application->name }}">
-          <img class="card-img-top card-img-top-resolved" src="{{ asset($application->result_img) }}" alt="{{ $application->name }}">
-        </div>
-        <div class="card-body">
-					<span class="badge badge-secondary">{{ $application->status->name }}</span>
-          <h5 class="card-title">{{ $application->name }}</h5>
-          <p class="card-text">{{ $application->description }}</p>
-          <p class="card-text"><small class="text-muted">{{ $application->created_at }}</small></p>
-        </div>
-      </div>
-    </div>	
+			@component('components.application_card')
+				@slot('application', $application)
+			@endcomponent
+		</div>	
+
 		@empty
 			Пока еще не одной проблемы не было решено
 		@endforelse
